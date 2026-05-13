@@ -14,6 +14,11 @@ app.use(express.json());
 // Servir o frontend estático (index.html na mesma pasta)
 app.use(express.static(path.join(__dirname)));
 
+// ─── Root route - serve index.html ─────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // ─── OpenAI client (chave nunca vai ao frontend) ───────────────────────────────
 if (process.env.OPENAI_API_KEY && !process.env.OPENAI_API_KEY.startsWith('sk-proj-sua')) {
   console.log('OpenAI API Key carregada com sucesso');
